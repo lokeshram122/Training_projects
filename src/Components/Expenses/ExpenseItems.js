@@ -1,4 +1,4 @@
-import ExpenseDate from "../Components/ExpenseDate";
+import ExpenseDate from "./ExpenseDate";
 import "./ExpenseItem.css";
 export default function ExpenseItems(props) {
   const { title, amount, date } = props.expenses;

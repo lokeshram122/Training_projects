@@ -1,9 +1,11 @@
 import logo from "./logo.svg";
 import "./App.css";
-import Expenses from "./Components/Expenses";
+import Expenses from "./Components/Expenses/Expenses";
+import CreateExpensesMain from "./Components/CreateExpenses/CreateExpensesMain";
+import React, { useState } from "react";
 
 function App() {
-  const expenses = [
+  const [expenses, setExpenses] = useState([
     {
       id: "e1",
       title: "Toilet Paper",
@@ -23,11 +25,19 @@ function App() {
       amount: 450,
       date: new Date(2021, 5, 12),
     },
-  ];
+  ]);
+
+  const getExpensesHandler = (expensesData) => {
+    console.log(expensesData);
+  };
+  const getFilterValueHandler = (FilterValue) => {
+    console.log(FilterValue);
+  };
 
   return (
     <div className="App">
-      <Expenses expenses={expenses} />
+      <CreateExpensesMain getExpenses={getExpensesHandler} />
+      <Expenses getFilterValue={getFilterValueHandler} expenses={expenses} />
     </div>
   );
 }
