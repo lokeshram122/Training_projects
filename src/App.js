@@ -28,10 +28,16 @@ function App() {
   ]);
 
   const getExpensesHandler = (expensesData) => {
-    console.log(expensesData);
+    setExpenses((prev) => [...prev, expensesData]);
   };
   const getFilterValueHandler = (FilterValue) => {
     console.log(FilterValue);
+    let FilteredExpenses = JSON.parse(JSON.stringify(expenses));
+    FilteredExpenses = FilteredExpenses.filter(
+      (x) => new Date(x.date).getFullYear() == FilterValue
+    );
+    console.log(FilteredExpenses);
+    setExpenses(FilteredExpenses);
   };
 
   return (

@@ -10,9 +10,12 @@ export default function Expenses(props) {
   return (
     <div className="expenses">
       <ExpensesFilter OnFilterSelect={OnFilterSelectHandler} />
-      <ExpenseItems expenses={props.expenses[0]} />
+      {props.expenses.map((expense) => (
+        <ExpenseItems expenses={expense} />
+      ))}
+      {/* <ExpenseItems expenses={props.expenses[0]} />
       <ExpenseItems expenses={props.expenses[1]} />
-      <ExpenseItems expenses={props.expenses[2]} />
+      <ExpenseItems expenses={props.expenses[2]} /> */}
     </div>
   );
 }
