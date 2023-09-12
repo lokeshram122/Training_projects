@@ -1,16 +1,22 @@
 import "./Expenses.css";
 import ExpenseItems from "./ExpenseItems";
 import ExpensesFilter from "./ExpensesFilter";
+import React, { useState } from "react";
 
 export default function Expenses(props) {
+  const [filteredValue, setFilteredValue] = useState();
   const OnFilterSelectHandler = (SelectedOption) => {
-    props.getFilterValue(SelectedOption);
+    setFilteredValue(SelectedOption);
   };
+  var FilteredExpenses = [];
+  FilteredExpenses = props.expenses.filter(
+    (x) => new Date(x.date).getFullYear() == filteredValue
+  );
 
   return (
     <div className="expenses">
       <ExpensesFilter OnFilterSelect={OnFilterSelectHandler} />
-      {props.expenses.map((expense) => (
+      {FilteredExpenses.map((expense) => (
         <ExpenseItems expenses={expense} />
       ))}
       {/* <ExpenseItems expenses={props.expenses[0]} />

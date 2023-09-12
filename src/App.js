@@ -30,20 +30,11 @@ function App() {
   const getExpensesHandler = (expensesData) => {
     setExpenses((prev) => [...prev, expensesData]);
   };
-  const getFilterValueHandler = (FilterValue) => {
-    console.log(FilterValue);
-    let FilteredExpenses = JSON.parse(JSON.stringify(expenses));
-    FilteredExpenses = FilteredExpenses.filter(
-      (x) => new Date(x.date).getFullYear() == FilterValue
-    );
-    console.log(FilteredExpenses);
-    setExpenses(FilteredExpenses);
-  };
 
   return (
     <div className="App">
       <CreateExpensesMain getExpenses={getExpensesHandler} />
-      <Expenses getFilterValue={getFilterValueHandler} expenses={expenses} />
+      <Expenses expenses={expenses} />
     </div>
   );
 }
