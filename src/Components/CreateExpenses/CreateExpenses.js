@@ -7,6 +7,8 @@ export default function CreateExpenses(props) {
     date: "",
   });
 
+  const [showNewExpenses, setShowNewExpenses] = useState(true);
+
   function formSubmit(e) {
     e.preventDefault();
     let expenses = {
@@ -23,56 +25,78 @@ export default function CreateExpenses(props) {
 
   return (
     <form onSubmit={formSubmit}>
-      <div className="new-expense__controls">
-        <div className="new-expense__control">
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            value={formData.title}
-            onChange={(e) => {
-              setFormData((prev) => {
-                return { ...prev, title: e.target.value };
-              });
-            }}
-          />
+      {!showNewExpenses && (
+        <div className="new-expense__controls">
+          <div className="new-expense__control">
+            <label htmlFor="title">Title:</label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              value={formData.title}
+              onChange={(e) => {
+                setFormData((prev) => {
+                  return { ...prev, title: e.target.value };
+                });
+              }}
+            />
+          </div>
+          <div className="new-expense__control">
+            <label htmlFor="amount">Amount:</label>
+            <input
+              type="number"
+              min="0.1"
+              step="0.01"
+              name="amount"
+              id="amount"
+              value={formData.amount}
+              onChange={(e) => {
+                setFormData((prev) => {
+                  return { ...prev, amount: e.target.value };
+                });
+              }}
+            />
+          </div>
+          <div className="new-expense__control">
+            <label htmlFor="date">Date:</label>
+            <input
+              type="date"
+              min="2019-01-01"
+              max="2023-12-31"
+              name="date"
+              id="date"
+              value={formData.date}
+              onChange={(e) => {
+                setFormData((prev) => {
+                  return { ...prev, date: e.target.value };
+                });
+              }}
+            />
+          </div>
         </div>
-        <div className="new-expense__control">
-          <label htmlFor="amount">Amount:</label>
-          <input
-            type="number"
-            min="0.1"
-            step="0.01"
-            name="amount"
-            id="amount"
-            value={formData.amount}
-            onChange={(e) => {
-              setFormData((prev) => {
-                return { ...prev, amount: e.target.value };
-              });
-            }}
-          />
-        </div>
-        <div className="new-expense__control">
-          <label htmlFor="date">Date:</label>
-          <input
-            type="date"
-            min="2019-01-01"
-            max="2023-12-31"
-            name="date"
-            id="date"
-            value={formData.date}
-            onChange={(e) => {
-              setFormData((prev) => {
-                return { ...prev, date: e.target.value };
-              });
-            }}
-          />
-        </div>
-      </div>
+      )}
+
       <div className="new-expense__actions">
-        <input type="submit" value="Add Expense" />
+        {showNewExpenses ? (
+          <input
+            type="button"
+            onClick={() => {
+              setShowNewExpenses(false);
+            }}
+            value="Add New Expenses"
+          />
+        ) : (
+          <>
+            <input type="submit" value="Add Expense" />
+            <input
+              type="button"
+              value="Cancel"
+              onClick={() => {
+                setShowNewExpenses(true);
+              }}
+            />
+          </>
+        )}
       </div>
     </form>
   );
